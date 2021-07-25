@@ -24,7 +24,7 @@ brew install artginzburg/tap/sudo-touchid && sudo brew services start sudo-touch
 ### Using `curl`
 
 ```powershell
-curl -# https://raw.githubusercontent.com/artginzburg/sudo-touchid/main/sudo-touchid.sh -o /usr/local/bin/sudo-touchid && chmod +x /usr/local/bin/sudo-touchid && sudo curl -# https://raw.githubusercontent.com/artginzburg/sudo-touchid/main/com.user.sudo-touchid.plist -o /Library/LaunchDaemons/com.user.sudo-touchid.plist && /usr/local/bin/sudo-touchid
+curl -sL git.io/sudo-touchid | sh
 ```
 
 > The one-liner above cares about everything outlined below for you — so that on a new system the desired feature is just one command away.
