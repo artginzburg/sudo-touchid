@@ -1,7 +1,12 @@
 <div align="center">
 
 # sudo-touchid
-  Automate adding **TouchID** as sufficient sudo auth method <sup>for macOS</sup>
+
+Automate adding **TouchID** as sufficient sudo auth method <sup>for macOS</sup>
+  
+![Preview](preview.png)
+
+<sup>Just type <a href="https://git.io/nochime"><code>git.io/sudotouchid</code></a> to go here.</sup>
             
 </div>
 
