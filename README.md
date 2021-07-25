@@ -15,6 +15,14 @@ curl -sL raw.githubusercontent.com/artginzburg/sudo-touchid/main/sudo-touchid.sh
 
 ## Install
 
+### Using [🍺 Homebrew](https://brew.sh/)
+
+```powershell
+brew install artginzburg/tap/sudo-touchid && sudo brew services start sudo-touchid
+```
+
+### Using `curl`
+
 ```powershell
 curl -# https://raw.githubusercontent.com/artginzburg/sudo-touchid/main/sudo-touchid.sh -o /usr/local/bin/sudo-touchid && chmod +x /usr/local/bin/sudo-touchid && sudo curl -# https://raw.githubusercontent.com/artginzburg/sudo-touchid/main/com.user.sudo-touchid.plist -o /Library/LaunchDaemons/com.user.sudo-touchid.plist && /usr/local/bin/sudo-touchid
 ```
