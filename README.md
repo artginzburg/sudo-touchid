@@ -20,11 +20,13 @@ curl -sL raw.githubusercontent.com/artginzburg/sudo-touchid/main/sudo-touchid.sh
 
 ## Install
 
-### Using [🍺 Homebrew](https://brew.sh/)
+### Via [🍺 Homebrew](https://brew.sh/)
 
 ```powershell
 brew install artginzburg/tap/sudo-touchid && sudo brew services start sudo-touchid
 ```
+
+> Check out [the formula](https://github.com/artginzburg/homebrew-tap/blob/main/Formula/sudo-touchid.rb) if you're interested
 
 ### Using `curl`
 
@@ -32,7 +34,7 @@ brew install artginzburg/tap/sudo-touchid && sudo brew services start sudo-touch
 curl -sL git.io/sudo-touchid | sh
 ```
 
-> The one-liner above cares about everything outlined below for you — so that on a new system the desired feature is just one command away.
+> The one-liner above cares about everything outlined below for you — performing automated "manual" installation.
 
 <br />
 
