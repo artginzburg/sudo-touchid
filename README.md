@@ -1,10 +1,53 @@
-# sudo-touchid
- Automate adding TouchID as sufficient sudo auth method
+<div align="center">
 
-## Try it (without installing!)
+# sudo-touchid
+  Automate adding **TouchID** as sufficient sudo auth method <sup>for macOS</sup>
+            
+</div>
+
+## Try it out
 
 ```powershell
 curl -sL raw.githubusercontent.com/artginzburg/sudo-touchid/main/sudo-touchid.sh | sh
 ```
 
-> After running this command, you should be able to use TouchID for sudo in Terminal or whatever you're on
+> After that you should be able to use TouchID for sudo in Terminal or whatever you're on
+
+## Install
+
+```powershell
+curl -# https://raw.githubusercontent.com/artginzburg/sudo-touchid/main/sudo-touchid.sh -o /usr/local/bin/sudo-touchid && chmod +x /usr/local/bin/sudo-touchid && sudo curl -# https://raw.githubusercontent.com/artginzburg/sudo-touchid/main/com.user.sudo-touchid.plist -o /Library/LaunchDaemons/com.user.sudo-touchid.plist && /usr/local/bin/sudo-touchid
+```
+
+> The one-liner above cares about everything outlined below for you — so that on a new system the desired feature is just one command away.
+
+<br />
+
+## What does it do?
+
+`sudo-touchid.sh`:
+
+- Adds `auth sufficient pam_tid.so` to the top of `/etc/pam.d/sudo` file (following [@cabel's advice](https://twitter.com/cabel/status/931292107372838912))
+
+- Creates a backup file named `sudo.bak`.
+
+`com.user.sudo-touchid.plist`:
+
+- Runs `sudo-touchid.sh` on system reload
+
+  > Needed because any following macOS updates just wipe out our custom `sudo`.
+
+The installer:
+
+- Saves `sudo-touchid.sh` as `/usr/local/bin/sudo-touchid` and gives it the permission to execute.
+
+  > (yes, that also means you're able to run `sudo-touchid` from Terminal)
+
+- Saves `com.user.sudo-touchid.plist` to `/Library/LaunchDaemons/` so that it's running on boot (requires root permission).
+
+<br />
+
+### Manual installation
+
+1. Generally follow the steps provided by "The installer" above
+2. If you need to, store `sudo-touchid.sh` anywhere else and replace `/usr/local/bin` in `com.user.sudo-touchid.plist` with the chosen path.
