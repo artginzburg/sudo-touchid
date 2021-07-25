@@ -59,3 +59,11 @@ The installer:
 
 1. Generally follow the steps provided by "The installer" above
 2. If you need to, store `sudo-touchid.sh` anywhere else and replace `/usr/local/bin` in `com.user.sudo-touchid.plist` with the chosen path.
+
+<br />
+
+### Related
+
+#### Disabling password prompt for `sudo`
+
+- Change `%admin ALL=(ALL) ALL` to `%admin ALL=(ALL) NOPASSWD: ALL` in `/etc/sudoers`
