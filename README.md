@@ -23,7 +23,8 @@ curl -sL raw.githubusercontent.com/artginzburg/sudo-touchid/main/sudo-touchid.sh
 ### Via [🍺 Homebrew](https://brew.sh/)
 
 ```powershell
-brew install artginzburg/tap/sudo-touchid && sudo brew services start sudo-touchid
+brew install artginzburg/tap/sudo-touchid
+sudo brew services start sudo-touchid
 ```
 
 > Check out [the formula](https://github.com/artginzburg/homebrew-tap/blob/main/Formula/sudo-touchid.rb) if you're interested
