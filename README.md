@@ -2,7 +2,7 @@
 
 # sudo-touchid
 
-Automate adding **TouchID** as sufficient sudo auth method <sup>for macOS</sup>
+Automate adding [**TouchID**](https://support.apple.com/en-gb/guide/mac-help/mchl16fbf90a/mac) as sufficient root auth method <sup>for macOS</sup>
   
 ![Preview](preview.png)
 
@@ -16,7 +16,7 @@ Automate adding **TouchID** as sufficient sudo auth method <sup>for macOS</sup>
 curl -sL raw.githubusercontent.com/artginzburg/sudo-touchid/main/sudo-touchid.sh | sh
 ```
 
-> After that you should be able to use TouchID for sudo in Terminal or whatever you're on
+> Now entering sudo mode is easier than ever, just like on GitHub — with TouchID in Terminal or whatever you're on
 
 ## Install
 
