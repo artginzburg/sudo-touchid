@@ -10,13 +10,21 @@ Automate adding [**TouchID**](https://support.apple.com/en-gb/guide/mac-help/mch
             
 </div>
 
-## Try it out
+## Try it out <sub> &nbsp; <sup> &nbsp; without installing</sup></sub>
 
 ```powershell
 curl -sL raw.githubusercontent.com/artginzburg/sudo-touchid/main/sudo-touchid.sh | sh
 ```
 
 > Now entering sudo mode is easier than ever, just like on GitHub — with TouchID in Terminal or whatever you're on
+
+### Why?
+
+Productivity — macOS _updates_ do _reset_ `/etc/pam.d/sudo`, so previously users had to _manually_ edit the file after each upgrade.
+
+This tool was born to automate the process, allowing for TouchID sudo auth to be **quickly enabled** on a new/clean system.
+
+<br />
 
 ## Install
 
@@ -35,7 +43,7 @@ sudo brew services start sudo-touchid
 curl -sL git.io/sudo-touchid | sh
 ```
 
-> The one-liner above cares about everything outlined below for you — performing automated "manual" installation.
+> The one-liner above cares about everything outlined below for you — performing automated "manual" installation. But `brew install` is still the recommended way.
 
 <br />
 
