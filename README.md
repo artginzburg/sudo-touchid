@@ -4,7 +4,7 @@
 
 Automate adding [**TouchID**](https://support.apple.com/en-gb/guide/mac-help/mchl16fbf90a/mac) as sufficient root auth method <sup>for macOS</sup>
   
-![Preview](preview.png)
+![Preview](misc/preview.png)
 
 <sup>Just type <a href="https://git.io/sudotouchid"><code>git.io/sudotouchid</code></a> to go here.</sup>
             
