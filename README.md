@@ -20,7 +20,7 @@ curl -sL raw.githubusercontent.com/artginzburg/sudo-touchid/main/sudo-touchid.sh
 
 ### Why?
 
-Productivity — macOS _updates_ do _reset_ `/etc/pam.d/sudo`, so previously users had to _manually_ edit the file after each upgrade.
+Productivity · reliability — macOS _updates_ do _reset_ `/etc/pam.d/sudo`, so previously users had to _manually_ edit the file after each upgrade.
 
 This tool was born to automate the process, allowing for TouchID sudo auth to be **quickly enabled** on a new/clean system.
 
@@ -43,37 +43,42 @@ sudo brew services start sudo-touchid
 curl -sL git.io/sudo-touchid | sh
 ```
 
-> The one-liner above cares about everything outlined below for you — performing automated "manual" installation. But `brew install` is still the recommended way.
+> Performs automated "manual" installation. But `brew install` is still the recommended way.
 
 <br />
 
 ## What does it do?
 
-`sudo-touchid.sh`:
+#### `sudo-touchid.sh` — the script:
 
 - Adds `auth sufficient pam_tid.so` to the top of `/etc/pam.d/sudo` file (following [@cabel's advice](https://twitter.com/cabel/status/931292107372838912))
 
 - Creates a backup file named `sudo.bak`.
 
-`com.user.sudo-touchid.plist`:
+<details>
+  <summary align="right"><sub>Non-Homebrew files:</sub></summary>
+  <br />
+
+#### `com.user.sudo-touchid.plist` — the property list (global daemon):
 
 - Runs `sudo-touchid.sh` on system reload
 
   > Needed because any following macOS updates just wipe out our custom `sudo`.
 
-The installer:
+#### `install.sh` — the installer:
 
 - Saves `sudo-touchid.sh` as `/usr/local/bin/sudo-touchid` and gives it the permission to execute.
 
   > (yes, that also means you're able to run `sudo-touchid` from Terminal)
 
 - Saves `com.user.sudo-touchid.plist` to `/Library/LaunchDaemons/` so that it's running on boot (requires root permission).
+</details>
 
 <br />
 
 ### Manual installation
 
-1. Generally follow the steps provided by "The installer" above
+1. Generally follow the steps provided by the installer in "Non-Homebrew files"
 2. If you need to, store `sudo-touchid.sh` anywhere else and replace `/usr/local/bin` in `com.user.sudo-touchid.plist` with the chosen path.
 
 <br />
