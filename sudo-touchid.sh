@@ -1,5 +1,7 @@
 #!/bin/sh
 
+VERSION=0.2
+
 sudo_touchid_disable() {
   local touch_pam='auth       sufficient     pam_tid.so'
   local sudo_path='/etc/pam.d/sudo'
@@ -24,6 +26,10 @@ sudo_touchid() {
 
   for opt in "${@}"; do
     case "$opt" in
+      -V|--version)
+        echo "$VERSION"
+        return 0
+      ;;
       -D|--disable)
         sudo_touchid_disable
         return 0
