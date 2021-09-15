@@ -6,7 +6,7 @@ Automate adding [**TouchID**](https://support.apple.com/en-gb/guide/mac-help/mch
   
 ![Preview](misc/preview.png)
 
-<sup>Just type <a href="https://git.io/sudotouchid"><code>git.io/sudotouchid</code></a> to go here.</sup>
+<sub>Just type <a href="https://git.io/sudotouchid"><code>git.io/sudotouchid</code></a> to go here.</sub>
             
 </div>
 
@@ -51,7 +51,7 @@ curl -sL git.io/sudo-touchid | sh
 
 #### `sudo-touchid.sh` — the script:
 
-- Adds `auth sufficient pam_tid.so` to the top of `/etc/pam.d/sudo` file (following [@cabel's advice](https://twitter.com/cabel/status/931292107372838912))
+- Adds `auth sufficient pam_tid.so` to the top of `/etc/pam.d/sudo` file <sup>following [@cabel's advice](https://twitter.com/cabel/status/931292107372838912)d</sup>
 
 - Creates a backup file named `sudo.bak`.
 
