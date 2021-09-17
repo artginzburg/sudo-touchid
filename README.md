@@ -1,5 +1,7 @@
 <div align="center">
 
+<img height="64" src="misc/icon.png" />
+
 # sudo-touchid
 
 Automate adding [**TouchID**](https://support.apple.com/en-gb/guide/mac-help/mchl16fbf90a/mac) as sufficient root auth method <sup>for macOS</sup>
