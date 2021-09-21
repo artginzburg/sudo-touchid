@@ -15,10 +15,10 @@ Permanent [**TouchID**](https://support.apple.com/en-gb/guide/mac-help/mchl16fbf
 ## Try it out <sub> &nbsp; <sup> &nbsp; without installing</sup></sub>
 
 ```powershell
-curl -sL raw.githubusercontent.com/artginzburg/sudo-touchid/main/sudo-touchid.sh | sh
+curl -sL raw.githubusercontent.com/artginzburg/sudo-touchid/HEAD/sudo-touchid.sh | sh
 ```
 
-> Now entering sudo mode is easier than ever, just like on GitHub — with TouchID in Terminal or whatever you're on
+> Now entering sudo mode is easier than ever, just like on GitHub — with TouchID in Terminal or whatever you're on. <sup>Don't worry, you can also [reverse](#reverse-without-installation) it without installing</sup>
 
 ### Why?
 
@@ -28,7 +28,7 @@ This tool was born to automate the process, allowing for TouchID sudo auth to be
 
 <br />
 
-## Install <a href="https://github.com/artginzburg/sudo-touchid/releases"><img align="right" src="https://img.shields.io/github/downloads/artginzburg/sudo-touchid/total?label=downloads+since+v0.2" /></a>
+## Install <a href="https://github.com/artginzburg/sudo-touchid/releases"><img align="right" src="https://img.shields.io/github/downloads/artginzburg/sudo-touchid/total?label=downloads" /></a>
 
 ### Via [🍺 Homebrew](https://brew.sh/)
 
@@ -53,7 +53,7 @@ curl -sL git.io/sudo-touchid | sh
 
 #### `sudo-touchid.sh` — the script:
 
-- Adds `auth sufficient pam_tid.so` to the top of `/etc/pam.d/sudo` file <sup>following [@cabel's advice](https://twitter.com/cabel/status/931292107372838912)d</sup>
+- Adds `auth sufficient pam_tid.so` to the top of `/etc/pam.d/sudo` file <sup>following [@cabel's advice](https://twitter.com/cabel/status/931292107372838912)</sup>
 
 - Creates a backup file named `sudo.bak`.
 
@@ -89,7 +89,7 @@ curl -sL git.io/sudo-touchid | sh
 
 ### Why this?
 
-Fast · Reversible · Reliable
+Fast · [Reversible](#reverse-without-installation) · Reliable
 
 > Unlike other solutions, this can be included to your automated system build with `brew install artginzburg/tap/sudo-touchid && sudo brew services start sudo-touchid`. Always working, always up to date with major macOS upgrades!
 
@@ -103,6 +103,19 @@ Take a look at code size comparison of the previously favoured solution to the o
 that is about 6718 times difference.
 
 <br />
+
+### Reverse without installation
+
+```ps1
+sh <( curl -sL raw.githubusercontent.com/artginzburg/sudo-touchid/HEAD/sudo-touchid.sh ) --disable
+```
+
+<br />
+
+### Contributing
+
+##### [PRs](https://github.com/artginzburg/sudo-touchid/pulls) and [Issues](https://github.com/artginzburg/sudo-touchid/issues/new/choose) are much welcome!
+If you don't like something — change it or inform the ones willing to help.
 
 ### Related
 
