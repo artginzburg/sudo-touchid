@@ -15,7 +15,7 @@ Permanent [**TouchID**](https://support.apple.com/en-gb/guide/mac-help/mchl16fbf
 ## Try it out <sub> &nbsp; <sup> &nbsp; without installing</sup></sub>
 
 ```powershell
-curl -sL raw.githubusercontent.com/artginzburg/sudo-touchid/HEAD/sudo-touchid.sh | sh
+curl -sL github.com/artginzburg/sudo-touchid/releases/latest/download/sudo-touchid.sh | sh
 ```
 
 > Now entering sudo mode is easier than ever, just like on GitHub — with TouchID in Terminal or whatever you're on. <sup>Don't worry, you can also [reverse](#reverse-without-installation) it without installing</sup>
@@ -107,7 +107,7 @@ that is about 6718 times difference.
 ### Reverse without installation
 
 ```ps1
-sh <( curl -sL raw.githubusercontent.com/artginzburg/sudo-touchid/HEAD/sudo-touchid.sh ) --disable
+sh <( curl -sL github.com/artginzburg/sudo-touchid/releases/latest/download/sudo-touchid.sh ) -D
 ```
 
 <br />
