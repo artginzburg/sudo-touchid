@@ -1,12 +1,12 @@
 <div align="center">
 
-<img height="80" src="misc/icon.png" />
+<img height="80" src="res/icon.png" />
 
 ### sudo-touchid
 
 Permanent [**TouchID**](https://support.apple.com/en-gb/guide/mac-help/mchl16fbf90a/mac) support for `sudo`
   
-![Preview](misc/preview.png)
+![Preview](res/preview.png)
 
 <sub>Just type <a href="https://git.io/sudotouchid"><code>git.io/sudotouchid</code></a> to go here.</sub>
             
