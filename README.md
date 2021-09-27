@@ -28,7 +28,7 @@ This tool was born to automate the process, allowing for TouchID sudo auth to be
 
 <br />
 
-## Install <a href="https://github.com/artginzburg/sudo-touchid/releases"><img align="right" src="https://img.shields.io/github/downloads/artginzburg/sudo-touchid/total?label=downloads" /></a>
+## Install <a href="https://github.com/artginzburg/sudo-touchid/releases"><img align="right" src="https://img.shields.io/github/downloads/artginzburg/sudo-touchid/total?color=teal" /></a>
 
 ### Via [🍺 Homebrew](https://brew.sh/)
 
