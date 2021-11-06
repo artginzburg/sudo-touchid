@@ -5,17 +5,33 @@ VERSION=0.2
 touch_pam='auth       sufficient     pam_tid.so'
 sudo_path='/etc/pam.d/sudo'
 
+# Source: https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
+getc() {
+  local save_state
+  save_state="$(/bin/stty -g)"
+  /bin/stty raw -echo
+  IFS='' read -r -n 1 -d '' "$@"
+  /bin/stty "${save_state}"
+}
+wait_for_user() {
+  local c
+  echo
+  echo "Press RETURN to continue or any other key to abort"
+  getc c
+  # we test for \r and \n because some stuff does \r instead
+  if ! [[ "${c}" == $'\r' || "${c}" == $'\n' ]]; then
+    exit 1
+  fi
+}
+# Source end.
+
 sudo_touchid_disable() {
   if grep -e "^$touch_pam$" "$sudo_path" &>/dev/null; then
     echo "The following will be your $sudo_path after disabling:"
     printf '\n'
     grep -v "^$touch_pam$" "$sudo_path"
-    echo
-    read -p "Are you sure? [y] to confirm " -n 1 -r
-    echo
-    if [[ $REPLY =~ ^[Yy]$ ]]; then
-      sudo sed -i '.bak' -e "/^$touch_pam$/d" "$sudo_path"
-    fi
+    wait_for_user
+    sudo sed -i '.bak' -e "/^$touch_pam$/d" "$sudo_path"
   else
     echo "TouchID for sudo seems not to be enabled"
   fi
