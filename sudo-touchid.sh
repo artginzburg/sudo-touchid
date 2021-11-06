@@ -1,6 +1,7 @@
 #!/bin/bash
 
 VERSION=0.2
+readable_name='[TouchID for sudo]'
 
 touch_pam='auth       sufficient     pam_tid.so'
 sudo_path='/etc/pam.d/sudo'
@@ -32,14 +33,18 @@ sudo_touchid_disable() {
     grep -v "^$touch_pam$" "$sudo_path"
     wait_for_user
     sudo sed -i '.bak' -e "/^$touch_pam$/d" "$sudo_path"
+    echo "$readable_name has been disabled."
   else
-    echo "TouchID for sudo seems not to be enabled"
+    echo "$readable_name seems to be already disabled"
   fi
 }
 
 sudo_touchid_enable() {
   if ! grep -e "^$touch_pam$" "$sudo_path" &>/dev/null; then
+    echo "$readable_name enabled successfully."
     sudo sed -E -i '.bak' "1s/^(#.*)$/\1\n$touch_pam/" "$sudo_path"
+  else
+    echo "$readable_name seems to be enabled already"
   fi
 }
 
