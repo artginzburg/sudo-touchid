@@ -2,10 +2,10 @@
 
 VERSION=0.2
 
-sudo_touchid_disable() {
-  local touch_pam='auth       sufficient     pam_tid.so'
-  local sudo_path='/etc/pam.d/sudo'
+touch_pam='auth       sufficient     pam_tid.so'
+sudo_path='/etc/pam.d/sudo'
 
+sudo_touchid_disable() {
   if grep -e "^$touch_pam$" "$sudo_path" &>/dev/null; then
     echo "The following will be your $sudo_path after disabling:"
     printf '\n'
@@ -21,10 +21,13 @@ sudo_touchid_disable() {
   fi
 }
 
-sudo_touchid() {
-  local touch_pam='auth       sufficient     pam_tid.so'
-  local sudo_path='/etc/pam.d/sudo'
+sudo_touchid_enable() {
+  if ! grep -e "^$touch_pam$" "$sudo_path" &>/dev/null; then
+    sudo sed -E -i '.bak' "1s/^(#.*)$/\1\n$touch_pam/" "$sudo_path"
+  fi
+}
 
+sudo_touchid() {
   for opt in "${@}"; do
     case "$opt" in
     -V | --version)
@@ -38,8 +41,7 @@ sudo_touchid() {
     esac
   done
 
-  if ! grep -e "^$touch_pam$" "$sudo_path" &>/dev/null; then
-    sudo sed -E -i '.bak' "1s/^(#.*)$/\1\n$touch_pam/" "$sudo_path"
-  fi
+  sudo_touchid_enable
 }
+
 sudo_touchid "${@}"
