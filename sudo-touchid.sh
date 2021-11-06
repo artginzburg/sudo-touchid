@@ -29,7 +29,7 @@ wait_for_user() {
 sudo_touchid_disable() {
   if grep -e "^$touch_pam$" "$sudo_path" &>/dev/null; then
     echo "The following will be your $sudo_path after disabling:"
-    printf '\n'
+    echo
     grep -v "^$touch_pam$" "$sudo_path"
     wait_for_user
     sudo sed -i '.bak' -e "/^$touch_pam$/d" "$sudo_path"
