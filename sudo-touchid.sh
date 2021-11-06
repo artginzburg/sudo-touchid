@@ -59,6 +59,10 @@ sudo_touchid() {
       sudo_touchid_disable
       return 0
       ;;
+    *)
+      echo "$readable_name Unknown option: $opt"
+      return 0
+      ;;
     esac
   done
 
