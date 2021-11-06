@@ -27,8 +27,12 @@ wait_for_user() {
 }
 # Source end.
 
+sudo_touchid_is_enabled() {
+  grep -e "^$touch_pam$" "$sudo_path" &>/dev/null
+}
+
 sudo_touchid_disable() {
-  if grep -e "^$touch_pam$" "$sudo_path" &>/dev/null; then
+  if sudo_touchid_is_enabled; then
     echo "The following will be your $sudo_path after disabling:"
     echo
     grep -v "^$touch_pam$" "$sudo_path"
@@ -44,7 +48,7 @@ sudo_touchid_disable() {
 }
 
 sudo_touchid_enable() {
-  if ! grep -e "^$touch_pam$" "$sudo_path" &>/dev/null; then
+  if ! sudo_touchid_is_enabled; then
     if sudo sed -E -i "$backup_ext" "1s/^(#.*)$/\1\n$touch_pam/" "$sudo_path"; then
       echo "$readable_name enabled successfully."
     else
