@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VERSION=0.2
+VERSION=0.3
 readable_name='[TouchID for sudo]'
 
 touch_pam='auth       sufficient     pam_tid.so'
