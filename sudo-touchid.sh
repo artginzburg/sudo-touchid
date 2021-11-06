@@ -41,8 +41,8 @@ sudo_touchid_disable() {
 
 sudo_touchid_enable() {
   if ! grep -e "^$touch_pam$" "$sudo_path" &>/dev/null; then
-    echo "$readable_name enabled successfully."
     sudo sed -E -i '.bak' "1s/^(#.*)$/\1\n$touch_pam/" "$sudo_path"
+    echo "$readable_name enabled successfully."
   else
     echo "$readable_name seems to be enabled already"
   fi
