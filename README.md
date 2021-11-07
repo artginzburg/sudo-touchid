@@ -4,12 +4,12 @@
 
 ### sudo-touchid
 
-Permanent [**TouchID**](https://support.apple.com/en-gb/guide/mac-help/mchl16fbf90a/mac) support for `sudo`
-  
+Permanent [**TouchID**](https://support.apple.com/en-gb/guide/mac-help/mchl16fbf90a/mac) support for <a href="https://www.sudo.ws"><code>sudo</code></a>
+
 ![Preview](res/preview.png)
 
 <sub>Just type <a href="https://git.io/sudotouchid"><code>git.io/sudotouchid</code></a> to go here.</sub>
-            
+
 </div>
 
 ## Try it out <sub> &nbsp; <sup> &nbsp; without installing</sup></sub>
@@ -115,6 +115,7 @@ sh <( curl -sL git.io/sudo-touch-id ) -D
 ### Contributing
 
 ##### [PRs](https://github.com/artginzburg/sudo-touchid/pulls) and [Issues](https://github.com/artginzburg/sudo-touchid/issues/new/choose) are much welcome!
+
 If you don't like something — change it or inform the ones willing to help.
 
 ### Related
