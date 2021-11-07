@@ -28,7 +28,7 @@ wait_for_user() {
 # Source end.
 
 sudo_touchid_is_enabled() {
-  grep -e "^$touch_pam$" "$sudo_path" &>/dev/null
+  grep -q -e "^$touch_pam$" "$sudo_path"
 }
 
 sudo_touchid_disable() {
