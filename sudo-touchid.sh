@@ -27,6 +27,11 @@ wait_for_user() {
 }
 # Source end.
 
+display_backup_info() {
+  echo "Created a backup file at $sudo_path$backup_ext"
+  echo
+}
+
 display_sudo_without_touch_pam() {
   grep -v "^$touch_pam$" "$sudo_path"
 }
@@ -50,6 +55,7 @@ sudo_touchid_disable() {
     display_sudo_without_touch_pam
     wait_for_user
     if touch_pam_at_sudo_path_remove; then
+      display_backup_info
       echo "$readable_name has been disabled."
     else
       echo "$readable_name failed to disable"
@@ -64,6 +70,7 @@ sudo_touchid_enable() {
     echo "$readable_name seems to be enabled already"
   else
     if touch_pam_at_sudo_path_insert; then
+      display_backup_info
       echo "$readable_name enabled successfully."
     else
       echo "$readable_name failed to execute"
