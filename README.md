@@ -4,7 +4,7 @@
 
 ### sudo-touchid
 
-Permanent [**TouchID**](https://support.apple.com/en-gb/guide/mac-help/mchl16fbf90a/mac) support for <a href="https://www.sudo.ws"><code>sudo</code></a>
+Permanent [**TouchID**](https://en.wikipedia.org/wiki/Touch_ID) support for <a href="https://www.sudo.ws"><code>sudo</code></a>
 
 ![Preview](res/preview.png)
 
