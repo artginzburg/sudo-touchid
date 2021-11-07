@@ -27,6 +27,10 @@ wait_for_user() {
 }
 # Source end.
 
+display_sudo_without_touch_pam() {
+  grep -v "^$touch_pam$" "$sudo_path"
+}
+
 touch_pam_at_sudo_path_check_exists() {
   grep -q -e "^$touch_pam$" "$sudo_path"
 }
@@ -43,7 +47,7 @@ sudo_touchid_disable() {
   if touch_pam_at_sudo_path_check_exists; then
     echo "The following will be your $sudo_path after disabling:"
     echo
-    grep -v "^$touch_pam$" "$sudo_path"
+    display_sudo_without_touch_pam
     wait_for_user
     if touch_pam_at_sudo_path_remove; then
       echo "$readable_name has been disabled."
