@@ -81,11 +81,11 @@ sudo_touchid_enable() {
 sudo_touchid() {
   for opt in "${@}"; do
     case "$opt" in
-    -V | --version)
+    -v | --version)
       echo "$VERSION"
       return 0
       ;;
-    -D | --disable)
+    -d | --disable)
       sudo_touchid_disable
       return 0
       ;;
