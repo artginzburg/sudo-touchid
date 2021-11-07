@@ -82,7 +82,7 @@ sudo_touchid() {
   for opt in "${@}"; do
     case "$opt" in
     -v | --version)
-      echo "$VERSION"
+      echo "v$VERSION"
       return 0
       ;;
     -d | --disable)
