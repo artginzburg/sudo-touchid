@@ -48,14 +48,14 @@ sudo_touchid_disable() {
 }
 
 sudo_touchid_enable() {
-  if ! sudo_touchid_is_enabled; then
+  if sudo_touchid_is_enabled; then
+    echo "$readable_name seems to be enabled already"
+  else
     if sudo sed -E -i "$backup_ext" "1s/^(#.*)$/\1\n$touch_pam/" "$sudo_path"; then
       echo "$readable_name enabled successfully."
     else
       echo "$readable_name failed to execute"
     fi
-  else
-    echo "$readable_name seems to be enabled already"
   fi
 }
 
