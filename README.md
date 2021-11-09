@@ -147,14 +147,16 @@ that is about 6718 times difference.
 
 <br />
 
-### Contributing
+## Contributing
 
 ##### [PRs](https://github.com/artginzburg/sudo-touchid/pulls) and [Issues](https://github.com/artginzburg/sudo-touchid/issues/new/choose) are much welcome!
 
 If you don't like something — change it or inform the ones willing to help.
 
-### Related
+<br />
 
-#### Disabling password prompt for `sudo`
+## Related
+
+### Disabling password prompt for `sudo`
 
 - Change `%admin ALL=(ALL) ALL` to `%admin ALL=(ALL) NOPASSWD: ALL` in `/etc/sudoers`
