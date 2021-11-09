@@ -36,6 +36,7 @@ Now entering sudo mode is easier than ever, just like on GitHub — with your fi
 - Fast
 - Reliable
 - Written in Bash — no dependencies!
+- Include it to your automated system build — always working, always up to date with major macOS upgrades!
 
 ## Install
 
@@ -137,14 +138,6 @@ sh <( curl -sL git.io/sudo-touch-id ) [options]
 
 1. Generally follow the steps provided by the installer in "Non-Homebrew files"
 2. If you need to, store `sudo-touchid.sh` anywhere else and replace `/usr/local/bin` in `com.user.sudo-touchid.plist` with the chosen path.
-
-<br />
-
-### Why this?
-
-Fast · [Reversible](#reverse-without-installation) · Reliable
-
-> Unlike other solutions, this can be included to your automated system build with `brew install artginzburg/tap/sudo-touchid && sudo brew services start sudo-touchid`. Always working, always up to date with major macOS upgrades!
 
 <br />
 
