@@ -84,7 +84,7 @@ sudo-touchid [option]
 
 <br />
 
-## What does it do?
+## How does it work?
 
 #### `sudo-touchid.sh` — the script:
 
