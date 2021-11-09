@@ -22,7 +22,9 @@ Now entering sudo mode is easier than ever, just like on GitHub — with your fi
 > <sup>Don't worry, you can also [reverse](#reverse-without-installation) it without installing</sup>
 
 <div align="center">
-  
+
+<sub><sub>Result:</sub></sub>
+
 <img alt="Preview" src="./res/preview.png" width="500vmin" />
 
 <sub>Just type <a href="https://git.io/sudotouchid"><code>git.io/sudotouchid</code></a> to go here.</sub>
