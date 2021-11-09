@@ -37,7 +37,7 @@ This tool was born to automate the process, allowing for TouchID sudo auth to be
 
 ## Install
 
-### Via [🍺 Homebrew](https://brew.sh/)
+### Via [🍺 Homebrew](https://brew.sh/) (Recommended)
 
 ```powershell
 brew install artginzburg/tap/sudo-touchid
@@ -52,7 +52,7 @@ sudo brew services start sudo-touchid
 curl -sL git.io/sudo-touchid | sh
 ```
 
-> Performs automated "manual" installation. But `brew install` is still the recommended way.
+> Performs automated "manual" installation.
 
 <br />
 
