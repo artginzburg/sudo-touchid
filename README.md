@@ -17,7 +17,7 @@ Permanent [**TouchID**](https://support.apple.com/en-gb/guide/mac-help/mchl16fbf
 curl -sL git.io/sudo-touch-id | sh
 ```
 
-Now entering sudo mode is easier than ever, just like on GitHub — with your fingerprint in Terminal or whatever you're on.
+Now sudo is great, just like Safari — with your fingerprint in Terminal or whatever you're on.
 
 > <sup>Don't worry, you can also [reverse](#reverse-without-installation) it without installing</sup>
 
