@@ -1,14 +1,13 @@
-<div align="center">
+<img height="128" src="res/icon.png" alt="Icon" align="left" />
 
-<img height="80" src="res/icon.png" />
+# sudo-touchid
 
-### sudo-touchid
+[![Downloads](https://img.shields.io/github/downloads/artginzburg/sudo-touchid/total?color=teal)](https://github.com/artginzburg/sudo-touchid/releases)
+[![Donate](https://img.shields.io/badge/buy%20me%20a%20coffee-donate-white)](https://github.com/artginzburg/sudo-touchid?sponsor=1)
 
-Permanent [**TouchID**](https://en.wikipedia.org/wiki/Touch_ID) support for <a href="https://www.sudo.ws"><code>sudo</code></a>
+<div align="right">
 
-![Preview](res/preview.png)
-
-<sub>Just type <a href="https://git.io/sudotouchid"><code>git.io/sudotouchid</code></a> to go here.</sub>
+Permanent [**TouchID**](https://support.apple.com/en-gb/guide/mac-help/mchl16fbf90a/mac) support for `sudo`
 
 </div>
 
@@ -20,6 +19,14 @@ curl -sL git.io/sudo-touch-id | sh
 
 > Now entering sudo mode is easier than ever, just like on GitHub — with TouchID in Terminal or whatever you're on. <sup>Don't worry, you can also [reverse](#reverse-without-installation) it without installing</sup>
 
+<div align="center">
+  
+<img alt="Preview" src="./res/preview.png" width="500vmin" />
+
+<sub>Just type <a href="https://git.io/sudotouchid"><code>git.io/sudotouchid</code></a> to go here.</sub>
+
+</div>
+
 ### Why?
 
 Productivity · reliability — macOS _updates_ do _reset_ `/etc/pam.d/sudo`, so previously users had to _manually_ edit the file after each upgrade.
@@ -28,7 +35,7 @@ This tool was born to automate the process, allowing for TouchID sudo auth to be
 
 <br />
 
-## Install <a href="https://github.com/artginzburg/sudo-touchid/releases"><img align="right" src="https://img.shields.io/github/downloads/artginzburg/sudo-touchid/total?color=teal" /></a>
+## Install
 
 ### Via [🍺 Homebrew](https://brew.sh/)
 
