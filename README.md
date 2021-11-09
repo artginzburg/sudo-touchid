@@ -136,14 +136,13 @@ Fast · [Reversible](#reverse-without-installation) · Reliable
 
 > Unlike other solutions, this can be included to your automated system build with `brew install artginzburg/tap/sudo-touchid && sudo brew services start sudo-touchid`. Always working, always up to date with major macOS upgrades!
 
-Also, the script is small, doesn't need any builds, doesn't need XCode.
+The script is small, doesn't need any builds, doesn't need XCode.
 
-Take a look at code size comparison of the previously favoured solution to the one you're currently reading:
+Code size comparison — previously favoured solution VS. the one you're currently reading:
 
-[![](https://img.shields.io/github/languages/code-size/mattrajca/sudo-touchid?color=critical&label=mattrajca/sudo-touchid%20code%20size)](https://github.com/mattrajca/sudo-touchid)
-![](https://img.shields.io/github/languages/code-size/artginzburg/sudo-touchid?color=success&label=artginzburg/sudo-touchid%20code%20size)
+[![](https://img.shields.io/github/languages/code-size/mattrajca/sudo-touchid?color=brown&label=mattrajca/sudo-touchid%20—%20code%20size)](https://github.com/mattrajca/sudo-touchid)
 
-that is about 6718 times difference.
+![](https://img.shields.io/github/languages/code-size/artginzburg/sudo-touchid?color=teal&label=artginzburg/sudo-touchid%20—%20code%20size)
 
 <br />
 
