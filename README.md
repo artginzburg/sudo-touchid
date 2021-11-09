@@ -29,13 +29,11 @@ Now entering sudo mode is easier than ever, just like on GitHub — with your fi
 
 </div>
 
-### Why?
+## Features
 
-Productivity · reliability — macOS _updates_ do _reset_ `/etc/pam.d/sudo`, so previously users had to _manually_ edit the file after each upgrade.
-
-This tool was born to automate the process, allowing for TouchID sudo auth to be **quickly enabled** on a new/clean system.
-
-<br />
+- Fast
+- Reliable
+- Written in Bash — no dependencies!
 
 ## Install
 
@@ -56,8 +54,6 @@ curl -sL git.io/sudo-touchid | sh
 
 > Performs automated "manual" installation.
 
-<br />
-
 ## Usage
 
 ```ps1
@@ -67,6 +63,24 @@ sudo-touchid [option]
            # Commands:
              [-d,  --disable]   # Removes TouchID from sudo config
 ```
+
+<br />
+
+### Why?
+
+1. Productivity
+
+   macOS _updates_ do _reset_ `/etc/pam.d/sudo`, so previously users had to _manually_ edit the file after each upgrade.
+
+   > This tool was born to automate the process, allowing for TouchID sudo auth to be **quickly enabled** on a new/clean system.
+
+2. Spreading the technology.
+
+   I bet half of you didn't know.
+
+   > It was there for a long time.
+
+<br />
 
 ## What does it do?
 
