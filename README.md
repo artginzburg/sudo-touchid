@@ -59,11 +59,19 @@ curl -sL git.io/sudo-touchid | sh
 ## Usage
 
 ```ps1
-sudo-touchid [option]
+sudo-touchid [options]
              # Running without options adds TouchID parameter to sudo configuration
              [-v,  --version]   # Output installed version
            # Commands:
              [-d,  --disable]   # Removes TouchID from sudo config
+```
+
+if not installed, can be used via `curl`
+
+```ps1
+sh <( curl -sL git.io/sudo-touch-id ) [options]
+                                    # Reliability — check :)
+                                      [-d,  --disable]   # Removes TouchID from sudo config
 ```
 
 <br />
@@ -136,14 +144,6 @@ Take a look at code size comparison of the previously favoured solution to the o
 ![](https://img.shields.io/github/languages/code-size/artginzburg/sudo-touchid?color=success&label=artginzburg/sudo-touchid%20code%20size)
 
 that is about 6718 times difference.
-
-<br />
-
-### Reverse without installation
-
-```ps1
-sh <( curl -sL git.io/sudo-touch-id ) -D
-```
 
 <br />
 
