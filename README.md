@@ -56,6 +56,16 @@ curl -sL git.io/sudo-touchid | sh
 
 <br />
 
+## Usage
+
+```ps1
+sudo-touchid [option]
+             # Running without options adds TouchID parameter to sudo configuration
+             [-v,  --version]   # Output installed version
+           # Commands:
+             [-d,  --disable]   # Removes TouchID from sudo config
+```
+
 ## What does it do?
 
 #### `sudo-touchid.sh` — the script:
