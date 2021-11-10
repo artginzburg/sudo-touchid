@@ -1,15 +1,14 @@
-<div align="center">
+<img height="128" src="res/icon.png" alt="Icon" align="left" />
 
-<img height="80" src="res/icon.png" />
+# sudo-touchid
 
-### sudo-touchid
+[![Downloads](https://img.shields.io/github/downloads/artginzburg/sudo-touchid/total?color=teal)](https://github.com/artginzburg/sudo-touchid/releases)
+[![Donate](https://img.shields.io/badge/buy%20me%20a%20coffee-donate-white)](https://github.com/artginzburg/sudo-touchid?sponsor=1)
+
+<div align="right">
 
 Permanent [**TouchID**](https://support.apple.com/en-gb/guide/mac-help/mchl16fbf90a/mac) support for `sudo`
-  
-![Preview](res/preview.png)
 
-<sub>Just type <a href="https://git.io/sudotouchid"><code>git.io/sudotouchid</code></a> to go here.</sub>
-            
 </div>
 
 ## Try it out <sub> &nbsp; <sup> &nbsp; without installing</sup></sub>
@@ -18,19 +17,30 @@ Permanent [**TouchID**](https://support.apple.com/en-gb/guide/mac-help/mchl16fbf
 curl -sL git.io/sudo-touch-id | sh
 ```
 
-> Now entering sudo mode is easier than ever, just like on GitHub — with TouchID in Terminal or whatever you're on. <sup>Don't worry, you can also [reverse](#reverse-without-installation) it without installing</sup>
+Now sudo is great, just like Safari — with your fingerprint in Terminal or whatever you're on.
 
-### Why?
+> <sup>Don't worry, you can also [reverse](#usage) it without installing</sup>
 
-Productivity · reliability — macOS _updates_ do _reset_ `/etc/pam.d/sudo`, so previously users had to _manually_ edit the file after each upgrade.
+<div align="center">
 
-This tool was born to automate the process, allowing for TouchID sudo auth to be **quickly enabled** on a new/clean system.
+<sub><sub>Result:</sub></sub>
 
-<br />
+<img alt="Preview" src="./res/preview.png" width="500vmin" />
 
-## Install <a href="https://github.com/artginzburg/sudo-touchid/releases"><img align="right" src="https://img.shields.io/github/downloads/artginzburg/sudo-touchid/total?color=teal" /></a>
+<sub>Just type <a href="https://git.io/sudotouchid"><code>git.io/sudotouchid</code></a> to go here.</sub>
 
-### Via [🍺 Homebrew](https://brew.sh/)
+</div>
+
+## Features
+
+- Fast
+- Reliable
+- Written in Bash — no dependencies!
+- Include it to your automated system build — always working, always up to date with major macOS upgrades!
+
+## Install
+
+### Via [🍺 Homebrew](https://brew.sh/) (Recommended)
 
 ```powershell
 brew install artginzburg/tap/sudo-touchid
@@ -45,11 +55,55 @@ sudo brew services start sudo-touchid
 curl -sL git.io/sudo-touchid | sh
 ```
 
-> Performs automated "manual" installation. But `brew install` is still the recommended way.
+> Performs automated "manual" installation.
+
+## Usage
+
+```ps1
+sudo-touchid [options]
+           # Running without options adds TouchID parameter to sudo configuration
+             [-v,  --version]   # Output installed version
+           # Commands:
+             [-d,  --disable]   # Removes TouchID from sudo config
+```
+
+if not installed, can be used via `curl`
+
+```ps1
+sh <( curl -sL git.io/sudo-touch-id ) [options]
+                                    # Reliability — check :)
+                                      [-d,  --disable]   # Removes TouchID from sudo config
+```
 
 <br />
 
-## What does it do?
+### Why?
+
+1. Productivity
+
+   macOS _updates_ do _reset_ `/etc/pam.d/sudo`, so previously users had to _manually_ edit the file after each upgrade.
+
+   > This tool was born to automate the process, allowing for TouchID sudo auth to be **quickly enabled** on a new/clean system.
+
+2. Spreading the technology.
+
+   I bet half of you didn't know.
+
+   > It was there for a long time.
+
+3. Lightness
+
+   The script is small, doesn't need any builds, doesn't need XCode.
+
+   ##### Code size comparison — previously favoured solution VS. the one you're currently reading:
+
+   [![](https://img.shields.io/github/languages/code-size/mattrajca/sudo-touchid?color=brown&label=mattrajca/sudo-touchid%20—%20code%20size)](https://github.com/mattrajca/sudo-touchid)
+
+   ![](https://img.shields.io/github/languages/code-size/artginzburg/sudo-touchid?color=teal&label=artginzburg/sudo-touchid%20—%20code%20size)
+
+<br />
+
+## How does it work?
 
 #### `sudo-touchid.sh` — the script:
 
@@ -57,7 +111,7 @@ curl -sL git.io/sudo-touchid | sh
 
 - Creates a backup file named `sudo.bak`.
 
-- Has a `--disable` (`-D`) option that performs the opposite of the steps above.
+- Has a `--disable` (`-d`) option that performs the opposite of the steps above.
 
 <details>
   <summary align="right"><sub>Non-Homebrew files:</sub></summary>
@@ -87,38 +141,16 @@ curl -sL git.io/sudo-touchid | sh
 
 <br />
 
-### Why this?
-
-Fast · [Reversible](#reverse-without-installation) · Reliable
-
-> Unlike other solutions, this can be included to your automated system build with `brew install artginzburg/tap/sudo-touchid && sudo brew services start sudo-touchid`. Always working, always up to date with major macOS upgrades!
-
-Also, the script is small, doesn't need any builds, doesn't need XCode.
-
-Take a look at code size comparison of the previously favoured solution to the one you're currently reading:
-
-[![](https://img.shields.io/github/languages/code-size/mattrajca/sudo-touchid?color=critical&label=mattrajca/sudo-touchid%20code%20size)](https://github.com/mattrajca/sudo-touchid)
-![](https://img.shields.io/github/languages/code-size/artginzburg/sudo-touchid?color=success&label=artginzburg/sudo-touchid%20code%20size)
-
-that is about 6718 times difference.
-
-<br />
-
-### Reverse without installation
-
-```ps1
-sh <( curl -sL git.io/sudo-touch-id ) -D
-```
-
-<br />
-
-### Contributing
+## Contributing
 
 ##### [PRs](https://github.com/artginzburg/sudo-touchid/pulls) and [Issues](https://github.com/artginzburg/sudo-touchid/issues/new/choose) are much welcome!
+
 If you don't like something — change it or inform the ones willing to help.
 
-### Related
+<br />
 
-#### Disabling password prompt for `sudo`
+## Related
+
+### Disabling password prompt for `sudo`
 
 - Change `%admin ALL=(ALL) ALL` to `%admin ALL=(ALL) NOPASSWD: ALL` in `/etc/sudoers`
