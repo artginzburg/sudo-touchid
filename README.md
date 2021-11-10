@@ -57,6 +57,8 @@ curl -sL git.io/sudo-touchid | sh
 
 > Performs automated "manual" installation.
 
+<br />
+
 ## Usage
 
 ```ps1
