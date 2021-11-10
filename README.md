@@ -19,7 +19,7 @@ curl -sL git.io/sudo-touch-id | sh
 
 Now sudo is great, just like Safari — with your fingerprint in Terminal or whatever you're on.
 
-> <sup>Don't worry, you can also [reverse](#reverse-without-installation) it without installing</sup>
+> <sup>Don't worry, you can also [reverse](#usage) it without installing</sup>
 
 <div align="center">
 
