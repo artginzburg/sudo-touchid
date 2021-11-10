@@ -111,7 +111,7 @@ sh <( curl -sL git.io/sudo-touch-id ) [options]
 
 - Creates a backup file named `sudo.bak`.
 
-- Has a `--disable` (`-D`) option that performs the opposite of the steps above.
+- Has a `--disable` (`-d`) option that performs the opposite of the steps above.
 
 <details>
   <summary align="right"><sub>Non-Homebrew files:</sub></summary>
