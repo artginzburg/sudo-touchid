@@ -31,12 +31,14 @@ Now sudo is great, just like Safari — with your fingerprint in Terminal or wha
 
 </div>
 
-## Features
+### Features
 
 - Fast
 - Reliable
 - Written in Bash — no dependencies!
-- Include it to your automated system build — always working, always up to date with major macOS upgrades!
+- Include it to your automated system build — always working and up to date with major macOS upgrades!
+
+<br />
 
 ## Install
 
@@ -153,6 +155,6 @@ If you don't like something — change it or inform the ones willing to help.
 
 ## Related
 
-### Disabling password prompt for `sudo`
+#### Disabling password prompt for `sudo`
 
 - Change `%admin ALL=(ALL) ALL` to `%admin ALL=(ALL) NOPASSWD: ALL` in `/etc/sudoers`
