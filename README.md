@@ -51,11 +51,17 @@ sudo brew services start sudo-touchid
 
 > Check out [the formula](https://github.com/artginzburg/homebrew-tap/blob/main/Formula/sudo-touchid.rb) if you're interested
 
-### Using `curl`
+### Using [`curl`][curl]
 
 ```powershell
 curl -sL git.io/sudo-touchid | sh
 ```
+
+<div align="right"><sup>
+
+[`curl`][curl] is pre-installed in macOS
+
+</sup></div>
 
 > Performs automated "manual" installation.
 
@@ -71,7 +77,7 @@ sudo-touchid [options]
              [-d,  --disable]   # Removes TouchID from sudo config
 ```
 
-if not installed, can be used via `curl`
+if not installed, can be used via [`curl`][curl] <sup>bundled with macOS</sup>
 
 ```ps1
 sh <( curl -sL git.io/sudo-touch-id ) [options]
@@ -158,3 +164,5 @@ If you don't like something — change it or inform the ones willing to help.
 #### Disabling password prompt for `sudo`
 
 - Change `%admin ALL=(ALL) ALL` to `%admin ALL=(ALL) NOPASSWD: ALL` in `/etc/sudoers`
+
+[curl]: https://curl.se
