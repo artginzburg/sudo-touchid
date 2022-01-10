@@ -6,6 +6,7 @@ backup_ext='.bak'
 
 touch_pam='auth       sufficient     pam_tid.so'
 sudo_path='/etc/pam.d/sudo'
+nl=$'\n'
 
 # Source: https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
 getc() {
@@ -41,7 +42,7 @@ touch_pam_at_sudo_path_check_exists() {
 }
 
 touch_pam_at_sudo_path_insert() {
-  sudo sed -E -i "$backup_ext" "1s/^(#.*)$/\1\n$touch_pam/" "$sudo_path"
+  sudo sed -E -i "$backup_ext" "1s/^(#.*)$/\1\\${nl}$touch_pam/" "$sudo_path"
 }
 
 touch_pam_at_sudo_path_remove() {
