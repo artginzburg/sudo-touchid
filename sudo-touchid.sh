@@ -2,10 +2,28 @@
 
 VERSION=0.3
 readable_name='[TouchID for sudo]'
+executable_name='sudo-touchid'
+
+usage() {
+  cat <<EOF
+
+  Usage: $executable_name [options]
+    Running without options adds TouchID parameter to sudo configuration
+
+  Options:
+    -d,  --disable     Remove TouchID from sudo config
+
+    -v,  --version     Output version
+    -h,  --help        This message.
+
+EOF
+}
+
 backup_ext='.bak'
 
 touch_pam='auth       sufficient     pam_tid.so'
 sudo_path='/etc/pam.d/sudo'
+
 nl=$'\n'
 
 # Source: https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
@@ -90,8 +108,13 @@ sudo_touchid() {
       sudo_touchid_disable
       return 0
       ;;
+    -h | --help)
+      usage
+      return 0
+      ;;
     *)
-      echo "$readable_name Unknown option: $opt"
+      echo "Unknown option: $opt"
+      usage
       return 0
       ;;
     esac
