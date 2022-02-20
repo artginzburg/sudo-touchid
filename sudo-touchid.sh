@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VERSION=0.3
+VERSION=0.4
 readable_name='[TouchID for sudo]'
 executable_name='sudo-touchid'
 
