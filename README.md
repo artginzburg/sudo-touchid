@@ -21,6 +21,8 @@ Now sudo is great, just like Safari — with your fingerprint in Terminal or wha
 
 > <sup>Don't worry, you can also [reverse](#usage) it without installing</sup>
 
+> Please note: without [full installation](#install), TouchID for `sudo` will be disabled after the next macOS *update*.
+
 <div align="center">
 
 <sub><sub>Result:</sub></sub>
@@ -64,6 +66,11 @@ curl -sL git.io/sudo-touchid | sh
 </sup></div>
 
 > Performs automated "manual" installation.
+<br>
+
+The installation process:
+1. Makes the `sudo-touchid` command available.
+2. Makes it auto-run on every system launch <sup>(using a simple [`launchd`](https://www.launchd.info) daemon with RunAtLoad key set to true)</sup>, so that when a [macOS update erases our custom `sudo` configuration](https://www.reddit.com/r/MacOS/comments/ey2g5h/etcauto_master_keeps_getting_reset_sonce_catalina/), `sudo-touchid` fixes it again.
 
 <br />
 
