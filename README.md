@@ -172,4 +172,8 @@ If you don't like something — change it or inform the ones willing to help.
 
 - Change `%admin ALL=(ALL) ALL` to `%admin ALL=(ALL) NOPASSWD: ALL` in `/etc/sudoers`
 
+#### TouchID support in `tmux`
+
+- Have a look at [pam_reattach](https://github.com/fabianishere/pam_reattach) module
+
 [curl]: https://curl.se
