@@ -1,12 +1,9 @@
 name: Makefile CI
 
 on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+  - push
+  - pull_request
 
-  workflow_dispatch:
 jobs:
   test:
     runs-on: ubuntu-latest

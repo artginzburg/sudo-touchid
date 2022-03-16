@@ -1,4 +1,4 @@
-.PHONY: lint
+.PHONY: bundle check
 
 bundle:
 	brew bundle
