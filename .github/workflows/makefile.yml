@@ -1,12 +1,15 @@
-name: Lint
-on:
-  - push
-  - pull_request
+name: Makefile CI
 
-  workflow_dispatch:
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
 jobs:
-  lint:
+  test:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v3
@@ -14,7 +17,7 @@ jobs:
           fetch-depth: 1
 
       - name: Install dependencies
-        run: brew bundle
+        run: make
 
-      - name: Run "lint" from Makefile
-        run: make lint
+      - name: Run check
+        run: make check
