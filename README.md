@@ -176,4 +176,8 @@ If you don't like something — change it or inform the ones willing to help.
 
 - Have a look at [pam_reattach](https://github.com/fabianishere/pam_reattach) module
 
+#### Apple Watch TouchID support
+
+- Have a look at [pam_watchid](https://github.com/biscuitehh/pam-watchid) module
+
 [curl]: https://curl.se
