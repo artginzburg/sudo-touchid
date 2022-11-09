@@ -60,11 +60,11 @@ touch_pam_at_sudo_path_check_exists() {
 }
 
 touch_pam_at_sudo_path_insert() {
-  sudo sed -E -i "$backup_ext" "1s/^(#.*)$/\1\\${nl}$touch_pam/" "$sudo_path"
+  sudo /usr/bin/sed -E -i "$backup_ext" "1s/^(#.*)$/\1\\${nl}$touch_pam/" "$sudo_path"
 }
 
 touch_pam_at_sudo_path_remove() {
-  sudo sed -i "$backup_ext" -e "/^$touch_pam$/d" "$sudo_path"
+  sudo /usr/bin/sed -i "$backup_ext" -e "/^$touch_pam$/d" "$sudo_path"
 }
 
 sudo_touchid_disable() {
