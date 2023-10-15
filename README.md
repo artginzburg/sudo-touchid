@@ -17,11 +17,11 @@ Native and reliable [**TouchID**](https://support.apple.com/en-gb/guide/mac-help
 curl -sL git.io/sudo-touch-id | sh
 ```
 
-Now sudo is great, just like Safari — with your fingerprint in Terminal or whatever you're on.
+Now `sudo` is great, just like Safari — with your fingerprint in Terminal or whatever you're on.
 
-> <sup>Don't worry, you can also [reverse](#usage) it without installing</sup>
+> <sup>Don't worry, you can also [reverse](#usage) it</sup>
 
-> Please note: without [full installation](#install), TouchID for `sudo` will be disabled after the next macOS *update*.
+> Note for [Ventura](https://en.wikipedia.org/wiki/MacOS_Ventura) and prior: without [full installation](#install), TouchID for `sudo` will be disabled after the next macOS *update*.
 
 <div align="center">
 
