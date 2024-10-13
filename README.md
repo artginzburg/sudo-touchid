@@ -48,7 +48,7 @@ Now sudo is great, just like Safari — with your fingerprint in Terminal or wha
 
 ```powershell
 brew install artginzburg/tap/sudo-touchid
-sudo brew services start sudo-touchid
+sudo brew services restart artginzburg/tap/sudo-touchid
 ```
 
 > Check out [the formula](https://github.com/artginzburg/homebrew-tap/blob/main/Formula/sudo-touchid.rb) if you're interested
