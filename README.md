@@ -78,10 +78,12 @@ The installation process:
 
 ```ps1
 sudo-touchid [options]
-           # Running without options adds TouchID parameter to sudo configuration
+           # Running without options adds TouchID parameter to sudo configuration, or migrates an existing legacy configuration if you have upgraded from macOS 13 or below.
              [-v,  --version]   # Output installed version
            # Commands:
              [-d,  --disable]   # Removes TouchID from sudo config
+             [--with-reattach]  # Include pam_reattach.so for GUI session reattachment
+             [--migrate]        # Migrate from legacy configuration to new system
 ```
 
 if not installed, can be used via [`curl`][curl] <sup>bundled with macOS</sup>
@@ -124,11 +126,20 @@ sh <( curl -sL git.io/sudo-touch-id ) [options]
 
 #### `sudo-touchid.sh` — the script:
 
-- Adds `auth sufficient pam_tid.so` to the top of `/etc/pam.d/sudo` file <sup>following [@cabel's advice](https://twitter.com/cabel/status/931292107372838912)</sup>
+**All versions:**
+- Automatically detects and migrates legacy configurations.
+- Has a `--disable` (`-d`) option that removes all TouchID configurations.
+- Optional `--with-reattach` for GUI session reattachment support.
+- Creates backup files during migration.
 
+**For macOS 14+:**
+- Creates `/etc/pam.d/sudo_local` with TouchID configuration.
+- Never modifies system-managed `/etc/pam.d/sudo` file.
+
+**For macOS ≤13:**  
+- Adds `auth sufficient pam_tid.so` to the top of `/etc/pam.d/sudo` file <sup>following [@cabel's advice](https://twitter.com/cabel/status/931292107372838912)</sup>.
 - Creates a backup file named `sudo.bak`.
-
-- Has a `--disable` (`-d`) option that performs the opposite of the steps above.
+- Optional `--with-reattach` flag adds `pam_reattach.so` before `pam_tid.so` for tmux/screen support.
 
 <details>
   <summary align="right"><sub>Non-Homebrew files:</sub></summary>
