@@ -210,6 +210,12 @@ sudo_touchid_install() {
 
   # Check if already installed
   if [[ "$major_version" -ge 14 && -f "$SUDO_LOCAL_PATH" ]]; then
+    if [[ "$include_reattach" == "true" ]] && ! check_reattach_available; then
+      echo "Error: pam_reattach.so not found at $PAM_REATTACH_PATH"
+      echo "Install it with: brew install pam-reattach"
+      return 1
+    fi
+
     # Check if user wants pam_reattach but it's not installed
     if [[ "$include_reattach" == "true" ]] && check_reattach_available && ! grep -q "pam_reattach.so" "$SUDO_LOCAL_PATH" 2>/dev/null; then
       echo "$readable_name is installed but without pam_reattach support."
@@ -219,6 +225,12 @@ sudo_touchid_install() {
     echo "$readable_name appears to be already installed."
     return 0
   elif [[ "$major_version" -lt 14 ]] && grep -q "pam_tid.so" "$SUDO_PATH" 2>/dev/null; then
+    if [[ "$include_reattach" == "true" ]] && ! check_reattach_available; then
+      echo "Error: pam_reattach.so not found at $PAM_REATTACH_PATH"
+      echo "Install it with: brew install pam-reattach"
+      return 1
+    fi
+
     # Check if user wants pam_reattach but it's not installed
     if [[ "$include_reattach" == "true" ]] && check_reattach_available && ! grep -q "pam_reattach.so" "$SUDO_PATH" 2>/dev/null; then
       echo "$readable_name is installed but without pam_reattach support."
@@ -231,10 +243,9 @@ sudo_touchid_install() {
 
   # Check for pam_reattach if requested
   if [[ "$include_reattach" == "true" ]] && ! check_reattach_available; then
-    echo "Warning: pam_reattach.so not found at $PAM_REATTACH_PATH"
+    echo "Error: pam_reattach.so not found at $PAM_REATTACH_PATH"
     echo "Install it with: brew install pam-reattach"
-    echo "Continuing without pam_reattach..."
-    include_reattach="false"
+    return 1
   fi
 
   if [[ "$major_version" -ge 14 ]]; then
