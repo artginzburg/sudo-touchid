@@ -205,6 +205,31 @@ check_reattach_available() {
   [[ -f "$PAM_REATTACH_PATH" ]]
 }
 
+check_brew_available() {
+  command -v brew >/dev/null 2>&1
+}
+
+install_pam_reattach() {
+  if ! check_brew_available; then
+    error_echo "Error: Homebrew is required to install pam-reattach but is not available."
+    error_echo "Please install Homebrew first: https://brew.sh"
+    return 1
+  fi
+
+  status_echo "pam_reattach.so is required for --with-reattach but not found."
+  status_echo "Install pam-reattach using Homebrew?"
+  wait_for_user
+
+  verbose_echo "Installing pam-reattach..."
+  if brew install pam-reattach; then
+    status_echo "$readable_name pam-reattach installed successfully."
+    return 0
+  else
+    error_echo "$readable_name Failed to install pam-reattach."
+    return 1
+  fi
+}
+
 sudo_touchid_install() {
   local include_reattach="$1"
   local major_version
@@ -231,9 +256,9 @@ sudo_touchid_install() {
   # Check if already installed
   if [[ "$major_version" -ge 14 && -f "$SUDO_LOCAL_PATH" ]]; then
     if [[ "$include_reattach" == "true" ]] && ! check_reattach_available; then
-      error_echo "Error: pam_reattach.so not found at $PAM_REATTACH_PATH"
-      error_echo "Install it with: brew install pam-reattach"
-      return 1
+      if ! install_pam_reattach; then
+        return 1
+      fi
     fi
 
     # Check if user wants pam_reattach but it's not installed
@@ -246,9 +271,9 @@ sudo_touchid_install() {
     return 0
   elif [[ "$major_version" -lt 14 ]] && grep -q "pam_tid.so" "$SUDO_PATH" 2>/dev/null; then
     if [[ "$include_reattach" == "true" ]] && ! check_reattach_available; then
-      error_echo "Error: pam_reattach.so not found at $PAM_REATTACH_PATH"
-      error_echo "Install it with: brew install pam-reattach"
-      return 1
+      if ! install_pam_reattach; then
+        return 1
+      fi
     fi
 
     # Check if user wants pam_reattach but it's not installed
@@ -263,9 +288,9 @@ sudo_touchid_install() {
 
   # Check for pam_reattach if requested
   if [[ "$include_reattach" == "true" ]] && ! check_reattach_available; then
-    error_echo "Error: pam_reattach.so not found at $PAM_REATTACH_PATH"
-    error_echo "Install it with: brew install pam-reattach"
-    return 1
+    if ! install_pam_reattach; then
+      return 1
+    fi
   fi
 
   if [[ "$major_version" -ge 14 ]]; then
