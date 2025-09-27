@@ -7,6 +7,7 @@ executable_name='sudo-touchid'
 # Verbosity control
 VERBOSE=false
 QUIET=false
+AUTO_YES=false
 
 # PAM configuration
 PAM_TOUCHID='auth       sufficient     pam_tid.so'
@@ -31,6 +32,7 @@ usage() {
 
     --verbose          Show detailed output
     -q,  --quiet       Show minimal output (errors only)
+    -y,  --yes         Skip confirmation prompts (non-interactive mode)
 
     -v,  --version     Output version
     -h,  --help        This message.
@@ -47,6 +49,11 @@ getc() {
   /bin/stty "${save_state}"
 }
 wait_for_user() {
+  if [[ "$AUTO_YES" == true ]]; then
+    verbose_echo "Auto-confirming (--yes flag)"
+    return 0
+  fi
+
   local c
   echo
   echo "Press RETURN to continue or any other key to abort"
@@ -394,6 +401,9 @@ sudo_touchid() {
       ;;
     -q | --quiet)
       QUIET=true
+      ;;
+    -y | --yes)
+      AUTO_YES=true
       ;;
     -h | --help)
       usage
