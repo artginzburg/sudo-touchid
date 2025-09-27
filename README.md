@@ -69,6 +69,8 @@ sudo-touchid [options]
              [-d,  --disable]   # Remove TouchID from sudo config
              [--with-reattach]  # Include pam_reattach.so for tmux/screen support
              [--migrate]        # Migrate from legacy configuration
+             [--verbose]        # Show detailed output
+             [-q,  --quiet]     # Show minimal output (errors only)
 ```
 
 if not installed, can be used via [`curl`][curl] <sup>bundled with macOS</sup>

@@ -4,6 +4,10 @@ VERSION=0.5
 readable_name='[TouchID for sudo]'
 executable_name='sudo-touchid'
 
+# Verbosity control
+VERBOSE=false
+QUIET=false
+
 # PAM configuration
 PAM_TOUCHID='auth       sufficient     pam_tid.so'
 PAM_REATTACH_PATH='/opt/homebrew/lib/pam/pam_reattach.so'
@@ -24,6 +28,9 @@ usage() {
     -d,  --disable     Remove TouchID from sudo config
     --with-reattach    Include pam_reattach.so for GUI session reattachment
     --migrate          Migrate from legacy configuration to new system
+
+    --verbose          Show detailed output
+    -q,  --quiet       Show minimal output (errors only)
 
     -v,  --version     Output version
     -h,  --help        This message.
@@ -53,6 +60,19 @@ wait_for_user() {
 
 # Utility functions
 
+# Output functions for verbosity control
+verbose_echo() {
+  [[ "$VERBOSE" == true ]] && echo "$@"
+}
+
+status_echo() {
+  [[ "$QUIET" != true ]] && echo "$@"
+}
+
+error_echo() {
+  echo "$@" >&2
+}
+
 detect_os_version() {
   sw_vers -productVersion | cut -d. -f1
 }
@@ -80,14 +100,14 @@ install_file() {
   temp_file=$(mktemp 2>/dev/null)
 
   if [[ -z "$temp_file" ]]; then
-    echo "Error: Unable to create temporary file. Check /tmp directory permissions and available space."
-    echo "Please ensure /tmp exists, is writable, and has sufficient space."
+    error_echo "Error: Unable to create temporary file. Check /tmp directory permissions and available space."
+    error_echo "Please ensure /tmp exists, is writable, and has sufficient space."
     return 1
   fi
 
   if ! echo "$content" > "$temp_file" 2>/dev/null; then
-    echo "Error: Unable to write to temporary file. Check /tmp directory permissions and available space."
-    echo "Please ensure /tmp exists, is writable, and has sufficient space."
+    error_echo "Error: Unable to write to temporary file. Check /tmp directory permissions and available space."
+    error_echo "Please ensure /tmp exists, is writable, and has sufficient space."
     rm -f "$temp_file" 2>/dev/null
     return 1
   fi
@@ -106,7 +126,7 @@ check_legacy_configuration() {
 }
 
 migrate_legacy_configuration() {
-  echo "Migrating from legacy TouchID configuration..."
+  status_echo "Migrating from legacy TouchID configuration..."
 
   local major_version
   major_version=$(detect_os_version)
@@ -114,7 +134,7 @@ migrate_legacy_configuration() {
   # Remove legacy PAM file if it exists
   if [[ -f "$LEGACY_PAM_FILE" ]]; then
     sudo rm -f "$LEGACY_PAM_FILE"
-    echo "Removed legacy PAM file: $LEGACY_PAM_FILE"
+    verbose_echo "Removed legacy PAM file: $LEGACY_PAM_FILE"
   fi
 
 
@@ -123,30 +143,30 @@ migrate_legacy_configuration() {
     sudo cp "$SUDO_PATH" "$SUDO_PATH.bak"
     sudo sed -i '.bak' '/pam_tid\.so/d' "$SUDO_PATH"
     sudo sed -i '.bak' '/pam_reattach\.so/d' "$SUDO_PATH"
-    echo "Removed TouchID configuration from $SUDO_PATH (backup saved as $SUDO_PATH.bak)"
+    verbose_echo "Removed TouchID configuration from $SUDO_PATH (backup saved as $SUDO_PATH.bak)"
   fi
 
-  echo "Legacy configuration removed successfully."
+  status_echo "Legacy configuration removed successfully."
 }
 
 sudo_touchid_pamlocal_install() {
   local include_reattach="$1"
 
-  echo "Installing TouchID configuration for macOS 14+"
+  verbose_echo "Installing TouchID configuration for macOS 14+"
 
   # Create PAM configuration for sudo_local
   local pam_content
   pam_content=$(create_pam_content "$include_reattach")
 
   if ! install_file "$pam_content" "$SUDO_LOCAL_PATH" "644"; then
-    echo "Error: Failed to create $SUDO_LOCAL_PATH"
+    error_echo "Error: Failed to create $SUDO_LOCAL_PATH"
     return 1
   fi
 
-  echo "Created $SUDO_LOCAL_PATH"
-  echo
-  echo "$readable_name enabled successfully for macOS 14+."
-  echo "Note: If TouchID for sudo stops working, you can disable it with: $executable_name --disable"
+  verbose_echo "Created $SUDO_LOCAL_PATH"
+  status_echo
+  status_echo "$readable_name enabled successfully for macOS 14+."
+  verbose_echo "Note: If TouchID for sudo stops working, you can disable it with: $executable_name --disable"
 
   return 0
 }
@@ -154,11 +174,11 @@ sudo_touchid_pamlocal_install() {
 sudo_touchid_legacy_install() {
   local include_reattach="$1"
 
-  echo "Installing TouchID configuration for macOS ≤13"
+  verbose_echo "Installing TouchID configuration for macOS ≤13"
 
   # Check if already configured
   if grep -q "pam_tid.so" "$SUDO_PATH" 2>/dev/null; then
-    echo "$readable_name seems to be enabled already"
+    status_echo "$readable_name seems to be enabled already"
     return 0
   fi
 
@@ -174,9 +194,9 @@ sudo_touchid_legacy_install() {
     sudo sed -E -i ".bak" "1s/^(#.*)$/\1\\${nl}$touch_pam_line/" "$SUDO_PATH"
   fi
 
-  echo "Created a backup file at $SUDO_PATH.bak"
-  echo
-  echo "$readable_name enabled successfully."
+  verbose_echo "Created a backup file at $SUDO_PATH.bak"
+  status_echo
+  status_echo "$readable_name enabled successfully."
 
   return 0
 }
@@ -192,14 +212,14 @@ sudo_touchid_install() {
 
   # Check for migration from legacy configuration
   if check_legacy_configuration; then
-    echo "Legacy TouchID configuration detected. Migrating to new secure method..."
+    status_echo "Legacy TouchID configuration detected. Migrating to new secure method..."
     if migrate_legacy_configuration; then
       # After migration, verify legacy configuration is removed
       if check_legacy_configuration; then
-        echo "Error: Legacy configuration still detected after migration. Aborting to prevent infinite loop."
+        error_echo "Error: Legacy configuration still detected after migration. Aborting to prevent infinite loop."
         return 1
       else
-        echo "Migration completed. Re-running installation with new method..."
+        verbose_echo "Migration completed. Re-running installation with new method..."
         sudo_touchid_install "$include_reattach"
         return $?
       fi
@@ -211,40 +231,40 @@ sudo_touchid_install() {
   # Check if already installed
   if [[ "$major_version" -ge 14 && -f "$SUDO_LOCAL_PATH" ]]; then
     if [[ "$include_reattach" == "true" ]] && ! check_reattach_available; then
-      echo "Error: pam_reattach.so not found at $PAM_REATTACH_PATH"
-      echo "Install it with: brew install pam-reattach"
+      error_echo "Error: pam_reattach.so not found at $PAM_REATTACH_PATH"
+      error_echo "Install it with: brew install pam-reattach"
       return 1
     fi
 
     # Check if user wants pam_reattach but it's not installed
     if [[ "$include_reattach" == "true" ]] && check_reattach_available && ! grep -q "pam_reattach.so" "$SUDO_LOCAL_PATH" 2>/dev/null; then
-      echo "$readable_name is installed but without pam_reattach support."
-      echo "Please run --disable first, then reinstall with --with-reattach."
+      error_echo "$readable_name is installed but without pam_reattach support."
+      error_echo "Please run --disable first, then reinstall with --with-reattach."
       return 1
     fi
-    echo "$readable_name appears to be already installed."
+    status_echo "$readable_name appears to be already installed."
     return 0
   elif [[ "$major_version" -lt 14 ]] && grep -q "pam_tid.so" "$SUDO_PATH" 2>/dev/null; then
     if [[ "$include_reattach" == "true" ]] && ! check_reattach_available; then
-      echo "Error: pam_reattach.so not found at $PAM_REATTACH_PATH"
-      echo "Install it with: brew install pam-reattach"
+      error_echo "Error: pam_reattach.so not found at $PAM_REATTACH_PATH"
+      error_echo "Install it with: brew install pam-reattach"
       return 1
     fi
 
     # Check if user wants pam_reattach but it's not installed
     if [[ "$include_reattach" == "true" ]] && check_reattach_available && ! grep -q "pam_reattach.so" "$SUDO_PATH" 2>/dev/null; then
-      echo "$readable_name is installed but without pam_reattach support."
-      echo "Please run --disable first, then reinstall with --with-reattach."
+      error_echo "$readable_name is installed but without pam_reattach support."
+      error_echo "Please run --disable first, then reinstall with --with-reattach."
       return 1
     fi
-    echo "$readable_name appears to be already installed."
+    status_echo "$readable_name appears to be already installed."
     return 0
   fi
 
   # Check for pam_reattach if requested
   if [[ "$include_reattach" == "true" ]] && ! check_reattach_available; then
-    echo "Error: pam_reattach.so not found at $PAM_REATTACH_PATH"
-    echo "Install it with: brew install pam-reattach"
+    error_echo "Error: pam_reattach.so not found at $PAM_REATTACH_PATH"
+    error_echo "Install it with: brew install pam-reattach"
     return 1
   fi
 
@@ -267,23 +287,23 @@ sudo_touchid_disable() {
   fi
 
   if [[ $has_config -eq 0 ]]; then
-    echo "$readable_name seems to be already disabled"
+    status_echo "$readable_name seems to be already disabled"
     return 0
   fi
 
   # Show what will be removed
-  echo "The following TouchID configurations will be removed:"
-  echo
+  verbose_echo "The following TouchID configurations will be removed:"
+  verbose_echo
 
   if [[ -f "$SUDO_LOCAL_PATH" ]]; then
-    echo "  - $SUDO_LOCAL_PATH"
+    verbose_echo "  - $SUDO_LOCAL_PATH"
   fi
 
   if [[ -f "$LEGACY_PAM_FILE" ]]; then
-    echo "  - $LEGACY_PAM_FILE"
+    verbose_echo "  - $LEGACY_PAM_FILE"
   fi
 
-  if grep -q "pam_tid.so" "$SUDO_PATH" 2>/dev/null; then
+  if [[ "$VERBOSE" == "true" ]] && grep -q "pam_tid.so" "$SUDO_PATH" 2>/dev/null; then
     echo "  - TouchID line from $SUDO_PATH"
     echo
     echo "Your $SUDO_PATH will look like this after removal:"
@@ -300,14 +320,14 @@ sudo_touchid_disable() {
   # Remove sudo_local file (macOS 14+)
   if [[ -f "$SUDO_LOCAL_PATH" ]]; then
     sudo rm -f "$SUDO_LOCAL_PATH"
-    echo "Removed $SUDO_LOCAL_PATH"
+    verbose_echo "Removed $SUDO_LOCAL_PATH"
     files_removed=$((files_removed + 1))
   fi
 
   # Remove legacy PAM file
   if [[ -f "$LEGACY_PAM_FILE" ]]; then
     sudo rm -f "$LEGACY_PAM_FILE"
-    echo "Removed $LEGACY_PAM_FILE"
+    verbose_echo "Removed $LEGACY_PAM_FILE"
     files_removed=$((files_removed + 1))
   fi
 
@@ -316,12 +336,12 @@ sudo_touchid_disable() {
     sudo cp "$SUDO_PATH" "$SUDO_PATH.bak"
     sudo sed -i '.bak' '/pam_tid\.so/d' "$SUDO_PATH"
     sudo sed -i '.bak' '/pam_reattach\.so/d' "$SUDO_PATH"
-    echo "Removed TouchID configuration from $SUDO_PATH (backup saved as $SUDO_PATH.bak)"
+    verbose_echo "Removed TouchID configuration from $SUDO_PATH (backup saved as $SUDO_PATH.bak)"
     files_removed=$((files_removed + 1))
   fi
 
-  echo
-  echo "$readable_name has been disabled."
+  status_echo
+  status_echo "$readable_name has been disabled."
 }
 
 
@@ -343,6 +363,12 @@ sudo_touchid() {
       ;;
     --migrate)
       action="migrate"
+      ;;
+    --verbose)
+      VERBOSE=true
+      ;;
+    -q | --quiet)
+      QUIET=true
       ;;
     -h | --help)
       usage
